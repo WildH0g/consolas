@@ -23,7 +23,7 @@ export default function twoDimArrToTable(twoDimAr) {
   }
 
   // Transform objects to strings
-  twoDimAr = twoDimAr.map(row => row.map(trimObject_));
+  twoDimAr = twoDimAr.map((row) => row.map(trimObject_));
 
   // Get the maximum width of each column
   const colWidths = twoDimAr.reduce((widthsAr, row) => {
@@ -44,8 +44,8 @@ export default function twoDimArrToTable(twoDimAr) {
         .map((cell) => cell.replace(/\|/g, '-'))
         .join(' |')
         .replace(/[^|]/g, '-')}|\n`
-        .replace(/\|\-/g, '| ')
-        .replace(/\-\|/g, ' |');
+        .replace(/\|-/g, '| ')
+        .replace(/-\|/g, ' |');
     return tableStr + `|${rowPadded.join(' |')}|`;
   }, '');
 
