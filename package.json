@@ -1,0 +1,33 @@
+{
+  "name": "console-polyfill-for-apps-script",
+  "private": false,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "install:husky": "husky install && npx husky add .husky/pre-commit \"npm run format && npm t\"",
+    "dev": "vite",
+    "build": "vite build",
+    "build:push": "vite build && clasp push",
+    "preview": "vite preview",
+    "build:css:watch": "npx tailwindcss -i ./src/assets/input.css -o ./src/assets/output.css --watch",
+    "lint": "npx eslint src/**/*.ts dist/server/**/*.ts",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "npx prettier src/**/*.ts dist/server/**/*.ts --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "format": "npm run prettier:fix && npm run lint:fix",
+    "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
+    "play": "NODE_OPTIONS='--experimental-vm-modules' node ./sandbox/playground.js"
+  },
+  "devDependencies": {
+    "@types/google-apps-script": "^1.0.60",
+    "@types/jest": "^29.5.12",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-googleappsscript": "^1.0.4",
+    "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "prettier": "^2.8.8",
+    "vite": "^4.2.0",
+    "vite-plugin-singlefile": "^0.13.5"
+  }
+}

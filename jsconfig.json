@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2015",
+    "checkJs": true,
+    "types": ["jest"]
+  },
+  "include": ["**/*.js"],
+  "exclude": ["node_modules"]
+}
