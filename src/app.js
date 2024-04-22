@@ -1,5 +1,10 @@
+/*
+*
+* SOURCE: https://developer.mozilla.org/en-US/docs/Web/API/console
+*
+*/
+
 import twoDimArrToTable from './class-methods/table-2d-array.js';
-import { isTwoDimAr } from './helpers/type-checkers.js';
 
 /**
  * This class is a polyfill for the console object.
@@ -77,6 +82,24 @@ export const ConsoleX = (function () {
       console.log(output);
       return output;
     }
+
+    // TODO: Implement the assert method
+    assert() {}
+
+    // TODO: Implement the group methods  
+    group() {}
+
+    // TODO: Implement the dir method
+    dir() {}
+
+    // TODO: Implement the count method
+    count() {}
+
+    // TODO: Implement the countReset method
+    countReset() {}
+
+    // TODO: Implement the help method
+    help() {}
   }
 
   /** @type {null|ConsoleX} */
