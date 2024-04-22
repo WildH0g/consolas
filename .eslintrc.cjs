@@ -18,5 +18,6 @@ module.exports = {
   },
   rules: {
     'no-extra-boolean-cast': 'off',
+    'no-unused-vars': 'off',
   },
 };
