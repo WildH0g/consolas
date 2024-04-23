@@ -14,6 +14,7 @@ jobs:
         run: npm i
 
   format:
+    needs: install
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -28,6 +29,7 @@ jobs:
         run: npm run prettier
 
   test:
+    needs: format
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -38,6 +40,7 @@ jobs:
         run: npm t
 
   deploy:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
