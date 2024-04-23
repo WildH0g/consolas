@@ -10,10 +10,10 @@ import twoDimArrToTable from './class-methods/table-2d-array.js';
  * This class is a polyfill for the console object.
  * @class
  */
-export const ConsoleX = (function () {
+export const ConsolAS = (function () {
   /**
    * Indicates whether the console object has been polyfilled.
-   * @type {WeakMap<ConsoleX, *>}
+   * @type {WeakMap<ConsolAS, *>}
    */
   const POLYFILLED = new WeakMap();
 
@@ -31,7 +31,7 @@ export const ConsoleX = (function () {
 
   /**
    * The Console calls history.
-   * @type {WeakMap<ConsoleX, string[]>}
+   * @type {WeakMap<ConsolAS, string[]>}
    */
   const CALLS_HISTORY = new WeakMap();
 
@@ -40,19 +40,19 @@ export const ConsoleX = (function () {
    * @constructor
    */
 
-  class ConsoleX {
+  class ConsolAS {
     constructor() {
-      if (ConsoleX.instance) return ConsoleX.instance;
+      if (ConsolAS.instance) return ConsolAS.instance;
       POLYFILLED.set(this, false);
       CALLS_HISTORY.set(this, []);
       METHODS_TO_INHERIT.forEach((method) => (this[method] = console[method]));
-      ConsoleX.instance = this;
-      return ConsoleX.instance;
+      ConsolAS.instance = this;
+      return ConsolAS.instance;
     }
 
     /**
      * Polyfills the Console object.
-     * @returns {ConsoleX}
+     * @returns {ConsolAS}
      */
     polyfill() {
       if (this.isPolyfilled) return this;
@@ -114,13 +114,13 @@ export const ConsoleX = (function () {
     }
   }
 
-  /** @type {null|ConsoleX} */
-  ConsoleX.instance = null;
+  /** @type {null|ConsolAS} */
+  ConsolAS.instance = null;
 
   /**
    * Adds an output to the class history.
    * @param {string} output
-   * @param {ConsoleX} parent
+   * @param {ConsolAS} parent
    * @returns {string}
    */
   function addToHistory_(output, parent) {
@@ -128,5 +128,5 @@ export const ConsoleX = (function () {
     return output;
   }
 
-  return ConsoleX;
+  return ConsolAS;
 })();

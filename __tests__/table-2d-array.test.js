@@ -4,7 +4,7 @@ import twoDimArrToTable from '../src/class-methods/table-2d-array.js';
 // [ ] Add test: with object containinig objects
 // [ ] Add test: with object containing arrays
 
-describe('consolex.table', () => {
+describe('consolas.table', () => {
   it('2D Array', () => {
     const data = [
       ['Name', 'Profession'],

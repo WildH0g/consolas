@@ -1,5 +1,5 @@
-import { ConsoleX } from '../src/app.js';
-const cx = new ConsoleX().polyfill();
+import { ConsolAS } from '../src/app.js';
+const cx = new ConsolAS().polyfill();
 
 const twoDim = [
   ['Name', 'Profession'],
