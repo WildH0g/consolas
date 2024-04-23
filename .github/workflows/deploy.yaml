@@ -30,6 +30,10 @@ jobs:
         id: jest
         run: npm t
 
+      - name: NPM Build
+        id: npm-buld
+        run: npm run buld
+
       - name: Install clasp
         id: install-clasp
         run: sudo npm install @google/clasp@2.4.1 -g
