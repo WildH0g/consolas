@@ -25,6 +25,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+
       - name: lint
         id: eslint
         run: npm run lint
@@ -40,6 +46,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+
       - name: Unit Tests
         id: jest
         run: npm t
@@ -51,6 +63,12 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
 
       - name: Install clasp
         id: install-clasp
