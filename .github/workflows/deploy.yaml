@@ -3,7 +3,7 @@ name: Deploy Googel Apps Script
 on: push
 
 jobs:
-  install:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -18,19 +18,6 @@ jobs:
         id: npm-install
         run: npm i
 
-  format:
-    needs: install
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-
       - name: lint
         id: eslint
         run: npm run lint
@@ -39,36 +26,9 @@ jobs:
         id: prettier
         run: npm run prettier
 
-  test:
-    needs: format
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-
       - name: Unit Tests
         id: jest
         run: npm t
-
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
 
       - name: Install clasp
         id: install-clasp
