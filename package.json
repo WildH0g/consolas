@@ -1,5 +1,5 @@
 {
-  "name": "console-polyfill-for-apps-script",
+  "name": "consolex",
   "description": "Adds useful Console methods to Google Apps Script",
   "author": "Dmitry Kostyuk | Wurkspaces.dev",
   "license": "MIT",
@@ -14,9 +14,9 @@
     "build:push": "vite build && clasp push",
     "preview": "vite preview",
     "build:css:watch": "npx tailwindcss -i ./src/assets/input.css -o ./src/assets/output.css --watch",
-    "lint": "npx eslint src/**/*.js",
+    "lint": "eslint ./src",
     "lint:fix": "npm run lint -- --fix",
-    "prettier": "npx prettier src/**/*.js --check",
+    "prettier": "prettier src/**/*.js --check",
     "prettier:fix": "npm run prettier -- --write",
     "format": "npm run prettier:fix && npm run lint:fix",
     "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
@@ -25,7 +25,7 @@
   "devDependencies": {
     "@types/google-apps-script": "^1.0.60",
     "@types/jest": "^29.5.12",
-    "eslint": "^8.40.0",
+    "eslint": "^8.4.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-googleappsscript": "^1.0.4",
     "husky": "^8.0.3",

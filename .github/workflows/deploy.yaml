@@ -22,7 +22,7 @@ jobs:
 
       - name: lint
         id: eslint
-        run: npm run lint --  --config .eslintrc.cjs
+        run: npm run lint
 
       - name: prettify
         id: prettier

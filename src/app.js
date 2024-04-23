@@ -1,8 +1,8 @@
 /*
-*
-* SOURCE: https://developer.mozilla.org/en-US/docs/Web/API/console
-*
-*/
+ *
+ * SOURCE: https://developer.mozilla.org/en-US/docs/Web/API/console
+ *
+ */
 
 import twoDimArrToTable from './class-methods/table-2d-array.js';
 
@@ -85,32 +85,32 @@ export const ConsoleX = (function () {
 
     // TODO: Implement the assert method
     assert() {
-      console.log('⏳ Not implemented yet')
+      console.log('⏳ Not implemented yet');
     }
 
-    // TODO: Implement the group methods  
+    // TODO: Implement the group methods
     group() {
-      console.log('⏳ Not implemented yet')
+      console.log('⏳ Not implemented yet');
     }
 
     // TODO: Implement the dir method
     dir() {
-      console.log('⏳ Not implemented yet')
+      console.log('⏳ Not implemented yet');
     }
 
     // TODO: Implement the count method
     count() {
-      console.log('⏳ Not implemented yet')
+      console.log('⏳ Not implemented yet');
     }
 
     // TODO: Implement the countReset method
     countReset() {
-      console.log('⏳ Not implemented yet')
+      console.log('⏳ Not implemented yet');
     }
 
     // TODO: Implement the help method
     help() {
-      console.log('⏳ Not implemented yet')
+      console.log('⏳ Not implemented yet');
     }
   }
 
