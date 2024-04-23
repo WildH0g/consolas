@@ -84,22 +84,34 @@ export const ConsoleX = (function () {
     }
 
     // TODO: Implement the assert method
-    assert() {}
+    assert() {
+      console.log('⏳ Not implemented yet')
+    }
 
     // TODO: Implement the group methods  
-    group() {}
+    group() {
+      console.log('⏳ Not implemented yet')
+    }
 
     // TODO: Implement the dir method
-    dir() {}
+    dir() {
+      console.log('⏳ Not implemented yet')
+    }
 
     // TODO: Implement the count method
-    count() {}
+    count() {
+      console.log('⏳ Not implemented yet')
+    }
 
     // TODO: Implement the countReset method
-    countReset() {}
+    countReset() {
+      console.log('⏳ Not implemented yet')
+    }
 
     // TODO: Implement the help method
-    help() {}
+    help() {
+      console.log('⏳ Not implemented yet')
+    }
   }
 
   /** @type {null|ConsoleX} */

@@ -1,0 +1,55 @@
+name: Deploy Googel Apps Script
+
+on: push
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: NPM Install
+        id: npm-install
+        run: npm i
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: lint
+        id: eslint
+        run: npm run lint
+
+      - name: prettify
+        id: prettier
+        run: npm run prettier
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Unit Tests
+        id: jest
+        run: npm t
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install clasp
+        id: install-clasp
+        run: sudo npm install @google/clasp@2.4.1 -g
+
+      - name: Write CLASPRC_JSON secret to .clasprc.json file
+        id: write-clasprc
+        run: echo "$CLASPRC_JSON_SECRET" >> ~/.clasprc.json
+        env:
+          CLASPRC_JSON_SECRET: ${{ secrets.CLASPRC_JSON }}
+
+      - name: Check clasp login status
+        id: clasp_login
+        run: clasp login --status
+
+      - name: Checkout repo
+        id: checkout-repo
+        uses: actions/checkout@v2
+
+      - name: Push script to scripts.google.com
+        id: clasp-push
+        run: clasp push
