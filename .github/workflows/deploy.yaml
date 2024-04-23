@@ -32,7 +32,7 @@ jobs:
 
       - name: NPM Build
         id: npm-buld
-        run: npm run buld
+        run: npm run build
 
       - name: Install clasp
         id: install-clasp
