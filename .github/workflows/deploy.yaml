@@ -6,6 +6,9 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
       - name: NPM Install
         id: npm-install
         run: npm i
@@ -13,6 +16,9 @@ jobs:
   format:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
       - name: lint
         id: eslint
         run: npm run lint
@@ -24,6 +30,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
       - name: Unit Tests
         id: jest
         run: npm t
@@ -32,6 +41,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
       - name: Install clasp
         id: install-clasp
         run: sudo npm install @google/clasp@2.4.1 -g
@@ -45,10 +57,6 @@ jobs:
       - name: Check clasp login status
         id: clasp_login
         run: clasp login --status
-
-      - name: Checkout repo
-        id: checkout-repo
-        uses: actions/checkout@v2
 
       - name: Push script to scripts.google.com
         id: clasp-push
