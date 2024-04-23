@@ -31,7 +31,7 @@ jobs:
         run: npm t
 
       - name: NPM Build
-        id: npm-buld
+        id: npm-build
         run: npm run build
 
       - name: Install clasp
