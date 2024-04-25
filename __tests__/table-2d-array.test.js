@@ -4,7 +4,7 @@ import twoDimArrToTable from '../src/class-methods/table-2d-array.js';
 // [ ] Add test: with object containinig objects
 // [ ] Add test: with object containing arrays
 
-describe('consolas.table', () => {
+describe('2D array to MD table', () => {
   it('2D Array', () => {
     const data = [
       ['Name', 'Profession'],
@@ -14,12 +14,12 @@ describe('consolas.table', () => {
     ];
 
     const expectedResult = `
-| (index)  |    0      |     1      |
-| -------- | --------- | ---------- |
-|    0     |   Name    | Profession |
-|    1     | John Doe  | Developer  |
-|    2     | Jane Doe  |  Designer  |
-|    3     | Jim Doe   |   Artist   |`.trim();
+| (index) | 0        | 1          |
+| ------- | -------- | ---------- |
+| 0       | Name     | Profession |
+| 1       | John Doe | Developer  |
+| 2       | Jane Doe | Designer   |
+| 3       | Jim Doe  | Artist     |`.trim();
 
     expect(twoDimArrToTable(data)).toBe(expectedResult);
   });
@@ -28,10 +28,9 @@ describe('consolas.table', () => {
     const data =
       'This is not an array, strings are not allowed in this function';
     const expectedResult = `
-|      Error        |       Source        |          Input           |
-| ----------------- | ------------------- | ------------------------ |
-| Invalid argument  | table(TwoDimArray)  | This is not an array,... |
-    `.trim();
+| Error            | Source             | Input                    |
+| ---------------- | ------------------ | ------------------------ |
+| Invalid argument | table(TwoDimArray) | This is not an array,... |`.trim();
 
     //@ts-expect-error
     expect(twoDimArrToTable(data)).toBe(expectedResult);
@@ -70,12 +69,12 @@ describe('consolas.table', () => {
     ];
 
     const expectedResult = `
-| (index)  |    0      |            1             |
-| -------- | --------- | ------------------------ |
-|    0     |   Name    |         Address          |
-|    1     | John Doe  | {"street":"123 Main S... |
-|    2     | Jane Doe  | {"street":"456 Elm St... |
-|    3     | Jim Doe   | {"street":"789 Oak St... |`.trim();
+| (index) | 0        | 1                        |
+| ------- | -------- | ------------------------ |
+| 0       | Name     | Address                  |
+| 1       | John Doe | {"street":"123 Main S... |
+| 2       | Jane Doe | {"street":"456 Elm St... |
+| 3       | Jim Doe  | {"street":"789 Oak St... |`.trim();
 
   expect(twoDimArrToTable(data)).toBe(expectedResult);
   });

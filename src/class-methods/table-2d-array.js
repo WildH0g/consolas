@@ -1,16 +1,16 @@
-import { isTwoDimAr } from '../helpers/type-checkers.js';
+import TypeCheck from '../helpers/type-checkers.js';
 
 /**
- * Returns a two-dimensional array as a table
+ * Converts a two-dimensional array to a markdown table
  * @param {TwoDimArray} twoDimAr - The array to log out
- * @returns {string} - The output that was printed out
+ * @returns {string} - The markdown output
  */
-export default function twoDimArrToTable(twoDimAr) {
-  const isTypeError = !isTwoDimAr(twoDimAr);
+export default function twoDimArrToTable(twoDimAr, { addIndices = true } = {}) {
+  const isTypeError = !TypeCheck.isTwoDimAr(twoDimAr);
   //@ts-expect-error
   if (isTypeError) twoDimAr = generateError_(twoDimAr, 'table(TwoDimArray)');
 
-  if (!isTypeError) {
+  if (!isTypeError && addIndices) {
     // Add a column to the beginning of the table
     twoDimAr.forEach((row, i) => row.unshift(i + ''));
 
@@ -42,11 +42,11 @@ export default function twoDimArrToTable(twoDimAr) {
     if (1 === i)
       tableStr += `|${rowPadded
         .map((cell) => cell.replace(/\|/g, '-'))
-        .join(' |')
+        .join('|')
         .replace(/[^|]/g, '-')}|\n`
         .replace(/\|-/g, '| ')
         .replace(/-\|/g, ' |');
-    return tableStr + `|${rowPadded.join(' |')}|`;
+    return tableStr + `|${rowPadded.join('|')}|`;
   }, '');
 
   return table;
@@ -60,7 +60,7 @@ export default function twoDimArrToTable(twoDimAr) {
  */
 function pad_(str, cellLength) {
   str += '';
-  const padLeft = Math.floor((cellLength - str.length) / 2) + 1;
+  const padLeft = 1;
   const padRight = cellLength - str.length - padLeft + 2;
   return `${' '.repeat(padLeft)}${str}${' '.repeat(padRight)}`;
 }

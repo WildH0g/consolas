@@ -5,6 +5,19 @@
  */
 
 import twoDimArrToTable from './class-methods/table-2d-array.js';
+import objectToTable from './class-methods/table-object.js';
+import TypeCheck from './helpers/type-checkers.js';
+import polyfillRequire from './helpers/require-polyfill.js';
+polyfillRequire();
+// @ts-ignore
+require('google-apps-script');
+
+/**
+ * @typedef {Object} TreeOptions
+ * @property {number} [maxDepth=5] - The maximum depth of the tree.
+ * @property {number} [maxFolders=10] - The maximum number of folders to display.
+ * @property {number} [maxFiles=20] - The maximum number of files to display.
+ */
 
 /**
  * This class is a polyfill for the console object.
@@ -74,43 +87,65 @@ export const ConsolAS = (function () {
 
     /**
      * Prints arrays and objects in markdown table format.
-     * @param {TwoDimArray} ar
+     * @param {TwoDimArray | object} ar
      * @returns {string} - The
      */
     table(ar) {
-      const output = addToHistory_(twoDimArrToTable(ar), this);
+      const typeMap = {
+        isTwoDimAr: twoDimArrToTable,
+        isObject: objectToTable,
+      };
+
+      const fn = Object.keys(typeMap).reduce((fn, type) => {
+        if (!fn && TypeCheck[type](ar)) return typeMap[type];
+        return fn;
+      }, null);
+
+      if (null === fn) throw new Error('Cannot convert input to table');
+
+      const output = addToHistory_(fn(ar), this);
       console.log(output);
       return output;
     }
 
+    // TODO: Implement the tree method
+    /**
+     *
+     * @param {GoogleAppsScript.Drive.Folder} folder
+     * @param {TreeOptions} options
+     */
+    tree(folder, options) {
+      console.log('⏳ Method "tree" not implemented yet');
+    }
+
     // TODO: Implement the assert method
     assert() {
-      console.log('⏳ Not implemented yet');
+      console.log('⏳ Method "assert" not implemented yet');
     }
 
     // TODO: Implement the group methods
     group() {
-      console.log('⏳ Not implemented yet');
+      console.log('⏳ Method "group" not implemented yet');
     }
 
     // TODO: Implement the dir method
     dir() {
-      console.log('⏳ Not implemented yet');
+      console.log('⏳ Method "dir" not implemented yet');
     }
 
     // TODO: Implement the count method
     count() {
-      console.log('⏳ Not implemented yet');
+      console.log('⏳ Method "count" not implemented yet');
     }
 
     // TODO: Implement the countReset method
     countReset() {
-      console.log('⏳ Not implemented yet');
+      console.log('⏳ Method "countReset" not implemented yet');
     }
 
     // TODO: Implement the help method
     help() {
-      console.log('⏳ Not implemented yet');
+      console.log('⏳ Method "help" not implemented yet');
     }
   }
 

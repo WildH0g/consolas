@@ -43,4 +43,13 @@ const twoDimWithObj = [
   ],
 ]
 
-cx.table(twoDimWithObj);
+const object = {
+  name: 'John Doe',
+  profession: 'Developer',
+  age: 30,
+  city: 'Anytown',
+};
+
+cx.table(object);
+
+// cx.tree();
