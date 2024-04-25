@@ -13,13 +13,16 @@ describe('2D array to MD table', () => {
       ['Jim Doe', 'Artist'],
     ];
 
-    const expectedResult = `
-| (index) | 0        | 1          |
-| ------- | -------- | ---------- |
-| 0       | Name     | Profession |
-| 1       | John Doe | Developer  |
-| 2       | Jane Doe | Designer   |
-| 3       | Jim Doe  | Artist     |`.trim();
+    const expectedResult = [
+      '| (index) | 0        | 1          |',
+      '| ------- | -------- | ---------- |',
+      '| 0       | Name     | Profession |',
+      '| 1       | John Doe | Developer  |',
+      '| 2       | Jane Doe | Designer   |',
+      '| 3       | Jim Doe  | Artist     |',
+    ]
+      .join('\n')
+      .trim();
 
     expect(twoDimArrToTable(data)).toBe(expectedResult);
   });
@@ -27,10 +30,13 @@ describe('2D array to MD table', () => {
   it('Wrong input', () => {
     const data =
       'This is not an array, strings are not allowed in this function';
-    const expectedResult = `
-| Error            | Source             | Input                    |
-| ---------------- | ------------------ | ------------------------ |
-| Invalid argument | table(TwoDimArray) | This is not an array,... |`.trim();
+    const expectedResult = [
+      '| Error            | Source             | Input                    |',
+      '| ---------------- | ------------------ | ------------------------ |',
+      '| Invalid argument | table(TwoDimArray) | This is not an array,... |',
+    ]
+      .join('\n')
+      .trim();
 
     //@ts-expect-error
     expect(twoDimArrToTable(data)).toBe(expectedResult);
@@ -68,14 +74,17 @@ describe('2D array to MD table', () => {
       ],
     ];
 
-    const expectedResult = `
-| (index) | 0        | 1                        |
-| ------- | -------- | ------------------------ |
-| 0       | Name     | Address                  |
-| 1       | John Doe | {"street":"123 Main S... |
-| 2       | Jane Doe | {"street":"456 Elm St... |
-| 3       | Jim Doe  | {"street":"789 Oak St... |`.trim();
+    const expectedResult = [
+      '| (index) | 0        | 1                        |',
+      '| ------- | -------- | ------------------------ |',
+      '| 0       | Name     | Address                  |',
+      '| 1       | John Doe | {"street":"123 Main S... |',
+      '| 2       | Jane Doe | {"street":"456 Elm St... |',
+      '| 3       | Jim Doe  | {"street":"789 Oak St... |',
+    ]
+      .join('\n')
+      .trim();
 
-  expect(twoDimArrToTable(data)).toBe(expectedResult);
+    expect(twoDimArrToTable(data)).toBe(expectedResult);
   });
 });
