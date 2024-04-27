@@ -57,7 +57,9 @@ function buildNestedObj(entries, headers, key, isArray) {
         return buildNestedObj(Object.entries(v), headers, key, false);
       const idx = headers.findIndex((header) => header === k);
       acc[idx] = v;
-      return [...acc].map((cell) => (undefined !== cell ? cell : isArray ? '' : '{...}'));
+      return [...acc].map((cell) =>
+        undefined !== cell ? cell : isArray ? '' : '{...}'
+      );
     },
     [key, '']
   );
