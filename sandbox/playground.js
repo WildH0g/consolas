@@ -10,7 +10,8 @@ const twoDim = [
 
 const shortStr = 'Bla bla bla';
 
-const longStr = 'This is not an array, strings are not allowed in this function';
+const longStr =
+  'This is not an array, strings are not allowed in this function';
 
 const twoDimWithObj = [
   ['Name', 'Address'],
@@ -41,7 +42,7 @@ const twoDimWithObj = [
       zip: '12345',
     },
   ],
-]
+];
 
 const object = {
   name: 'John Doe',
@@ -50,6 +51,38 @@ const object = {
   city: 'Anytown',
 };
 
-cx.table(object);
+const nestedObj = {
+  name: 'John Doe',
+  address: {
+    street: {
+      name: 'Main Street',
+      number: 123,
+    },
+    city: 'Anytown',
+    state: 'CA',
+    zip: '12345',
+  },
+  profession: 'Developer',
+};
+
+const nestedObjWithArrays =  {
+  name: 'John Doe',
+  address: {
+    street: {
+      number: 23,
+      name: 'Main Street',
+    },
+    city: 'Anytown',
+    state: 'CA',
+    zip: '12345',
+    coord: [34.0522, -118.2437],
+  },
+  profession: 'Developer',
+  hobbies: ['reading', 'swimming', 'running'],
+  skills: ['JavaScript', 'Alpine', 'Node.js'],
+}
+
+cx.table(nestedObjWithArrays);
+// cx.table(nestedObj);
 
 // cx.tree();

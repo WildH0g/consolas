@@ -71,10 +71,10 @@ function pad_(str, cellLength) {
  * @param {number} len
  * @returns {string}
  */
-function trimObject_(obj, len = 25) {
+function trimObject_(obj) {
   if ('object' !== typeof obj) return obj;
   let str = JSON.stringify(obj);
-  if (str.length > len) str = str.substring(0, 21) + '...';
+  if (str.length > 25) str = str.substring(0, 21) + '...';
   return str;
 }
 

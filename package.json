@@ -20,7 +20,7 @@
     "prettier:fix": "npm run prettier -- --write",
     "format": "npm run prettier:fix && npm run lint:fix",
     "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
-    "play": "NODE_OPTIONS='--experimental-vm-modules' node ./sandbox/playground.js"
+    "play": "NODE_OPTIONS='--experimental-vm-modules' node --watch ./sandbox/playground.js"
   },
   "devDependencies": {
     "@types/google-apps-script": "^1.0.60",

@@ -52,7 +52,7 @@ describe('Object to MD Table', () => {
       address: {
         street: {
           number: 23,
-          name: 'Main St.',
+          name: 'Main Street',
         },
         city: 'Anytown',
         state: 'CA',
@@ -65,14 +65,13 @@ describe('Object to MD Table', () => {
     };
 
     const expectedResult = [
-      '| (index)    | Value     | street | city    | state | zip   | coord                | 0          | 1        | 2       |',
-      '| ---------- | --------- | ------ | ------- | ----- | ----- | -------------------- | ---------- | -------- | ------- |',
-      '|            |           |        |         |       |       |                      |            |          |         |',
-      '| name       | John Doe  |        |         |       |       |                      |            |          |         |',
-      '| address    |           | {…}    | Anytown | CA    | 12345 | [34.0522, -118.2437] |            |          |         |',
-      '| profession | Developer |        |         |       |       |                      |            |          |         |',
-      '| hobbies    |           |        |         |       |       |                      | reading    | swimming | running |',
-      '| skills     |           |        |         |       |       |                      | JavaScript | Alpine   | Node.js |',
+      '| (index)    | Value     | street | city    | state | zip   | coord               | number | name        | 0          | 1        | 2       |',
+      '| ---------- | --------- | ------ | ------- | ----- | ----- | ------------------- | ------ | ----------- | ---------- | -------- | ------- |',
+      '| name       | John Doe  |        |         |       |       |                     |        |             |            |          |         |',
+      '| address    |           | {...}  | Anytown | CA    | 12345 | [34.0522,-118.2437] | 23     | Main Street |            |          |         |',
+      '| profession | Developer |        |         |       |       |                     |        |             |            |          |         |',
+      '| hobbies    |           |        |         |       |       |                     |        |             | reading    | swimming | running |',
+      '| skills     |           |        |         |       |       |                     |        |             | JavaScript | Alpine   | Node.js |',
     ]
       .join('\n')
       .trim();
