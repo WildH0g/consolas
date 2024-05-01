@@ -4,15 +4,35 @@
   "author": "Dmitry Kostyuk | Wurkspaces.dev",
   "license": "MIT",
   "private": false,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
+  "main": "./dist/node/consolas.umd.cjs",
+  "module": "./dist/node/consolas.js",
+  "exports": {
+    ".": {
+      "import": "./dist/node/consolas.js",
+      "require": "./dist/node/consolas.umd.cjs"
+    }
+  },
+  "homepage": "https://github.com/WildH0g",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WildH0g"
+  },
+  "keywords": [
+    "consolas",
+    "console",
+    "google apps script",
+    "apps script",
+    "logger",
+    "log"
+  ],
   "scripts": {
     "install:husky": "husky install && npx husky add .husky/pre-commit \"npm run format && npm t\"",
     "mkreadme": "npx readme-md-generator",
     "dev": "vite",
     "build:cp": "vite build --config vite.config.copy-paste.js",
     "build:node": "vite build --config vite.config.node.js",
-    "build:gas:old": "node vite-plugin/vite-plugin-appsscript.js --in dist/copy-paste/consolas.iife.js --out dist/gas-lib/consolas.js --prop init",
     "build:gas": "vite build --config vite.config.gas.js",
     "build": "npm run build:cp && npm run build:node && npm run build:gas",
     "build:push": "vite build && clasp push",
@@ -29,7 +49,6 @@
   "devDependencies": {
     "@types/google-apps-script": "^1.0.60",
     "@types/jest": "^29.5.12",
-    "cli-options-parser": "^1.0.0",
     "eslint": "^8.4.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-googleappsscript": "^1.0.4",

@@ -1,9 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-// import cliToObject from 'cli-options-parser';
 
 /**
- * Removes the export statement from the generated code for the Apps Script environment
+ * Exports the initianton function from the library for better semantics
  * @param {string} filePath - The path to the code to process
  * @param {string} propName - The name of the prperty to extract from the IIFE
  * @returns {object} - Rollup plugin object
@@ -25,6 +24,3 @@ export function AppsScriptPlugin(filePath, propName) {
     },
   };
 }
-
-// const obj = cliToObject();
-// AppsScriptPlugin(obj['--in'], obj['--out'], obj['--prop']);
