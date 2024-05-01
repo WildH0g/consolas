@@ -10,7 +10,10 @@
     "install:husky": "husky install && npx husky add .husky/pre-commit \"npm run format && npm t\"",
     "mkreadme": "npx readme-md-generator",
     "dev": "vite",
-    "build": "vite build",
+    "build:cp": "vite build --config vite.config.copy-paste.js",
+    "build:node": "vite build --config vite.config.node.js",
+    "build:gas": "node vite-plugin/vite-plugin-appsscript.js --in dist/copy-paste/consolas.iife.js --out dist/gas-lib/consolas.js --prop init",
+    "build": "npm run build:cp && npm run build:node && npm run build:gas",
     "build:push": "vite build && clasp push",
     "preview": "vite preview",
     "build:css:watch": "npx tailwindcss -i ./src/assets/input.css -o ./src/assets/output.css --watch",
@@ -25,6 +28,7 @@
   "devDependencies": {
     "@types/google-apps-script": "^1.0.60",
     "@types/jest": "^29.5.12",
+    "cli-options-parser": "^1.0.0",
     "eslint": "^8.4.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-googleappsscript": "^1.0.4",
@@ -33,8 +37,5 @@
     "prettier": "^2.8.8",
     "vite": "^4.5.3",
     "vite-plugin-singlefile": "^0.13.5"
-  },
-  "dependencies": {
-    "terser": "^5.30.4"
   }
 }

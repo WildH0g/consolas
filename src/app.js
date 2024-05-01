@@ -10,7 +10,7 @@ import TypeCheck from './helpers/type-checkers.js';
 import polyfillRequire from './helpers/require-polyfill.js';
 polyfillRequire();
 // @ts-ignore
-require('google-apps-script');
+// require('google-apps-script');
 
 /**
  * @typedef {Object} TreeOptions
