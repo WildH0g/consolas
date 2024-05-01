@@ -1,10 +1,10 @@
 {
-  "name": "consolas",
+  "name": "@wildhog/consolas",
   "description": "Adds useful Console methods to Google Apps Script",
   "author": "Dmitry Kostyuk | Wurkspaces.dev",
   "license": "MIT",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "main": "./dist/node/consolas.umd.cjs",
   "module": "./dist/node/consolas.js",
@@ -14,10 +14,10 @@
       "require": "./dist/node/consolas.umd.cjs"
     }
   },
-  "homepage": "https://github.com/WildH0g",
+  "homepage": "https://github.com/WildH0g/consolas",
   "repository": {
     "type": "git",
-    "url": "https://github.com/WildH0g"
+    "url": "https://github.com/WildH0g/consolas"
   },
   "keywords": [
     "consolas",

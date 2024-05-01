@@ -13,11 +13,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-          registry-url: 'https://npm.pkg.github.com'
 
       - name: NPM Install
         id: npm-install
-        run: npm i
+        run: npm ci
 
       - name: lint
         id: eslint
@@ -51,10 +50,16 @@ jobs:
 
       - name: Push script to scripts.google.com
         id: clasp-push
-        run: clasp push && clasp deploy
+        run: clasp push -f && clasp deploy
 
-      - name: NPM
+      - name: Set up .npmrc
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: NPM Publish
         id: npm-publish
-        run: npm publish
-        env: 
+        run: npm publish --access=public
+        env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
