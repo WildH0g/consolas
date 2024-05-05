@@ -4,7 +4,7 @@
   "author": "Dmitry Kostyuk | Wurkspaces.dev",
   "license": "MIT",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "main": "./dist/node/consolas.umd.cjs",
   "module": "./dist/node/consolas.js",
