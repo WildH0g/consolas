@@ -29,7 +29,7 @@ const cx  = ConsoleAS.init();
 Install by running:
 
 ```sh
-npm install consolas
+npm i @wildhog/consolas
 ```
 
 Import and initiate `ConsolAS`:
