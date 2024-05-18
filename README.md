@@ -95,6 +95,31 @@ This prints out:
 | city       | Anytown   |
 ```
 
+**Example 3:**
+
+```js
+cx.table([
+  {name: 'John Doe',
+  profession: 'Developer',
+  age: 30,
+  city: 'Anytown'},
+  {name: 'Jack Sparrow',
+  profession: 'Pirate',
+  age: 38,
+  city: 'Shipwreck Village'},
+]);
+```
+
+This prints out:
+
+```text
+| (index) | 0            | 1          | 2   | 3                 |
+| ------- | ------------ | ---------- | --- | ----------------- |
+| 0       | name         | profession | age | city              |
+| 1       | John Doe     | Developer  | 30  | Anytown           |
+| 2       | Jack Sparrow | Pirate     | 38  | Shipwreck Village |
+```
+
 ## Supported Methods
 
 Currently only the `table(TwoDimArray|Object)` method works. Other methods will follow soon.
