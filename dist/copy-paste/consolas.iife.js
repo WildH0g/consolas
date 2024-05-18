@@ -7,38 +7,6 @@ var ConsolAS = (function (d) {
       return typeof e == "object" && !Array.isArray(e);
     }
     const f = { isTwoDimAr: b, isObject: O };
-  
-    //   function p(e, { addIndices: n = !0 } = {}) {
-    //     const c = !f.isTwoDimAr(e);
-    //     if ((c && (e = j(e, "table(TwoDimArray)")), !c && n)) {
-    //       e.forEach((i, r) => i.unshift(r + ""));
-    //       const t = new Array(e[0].length).fill().map((i, r) => (r === 0 ? "(index)" : r - 1 + ""));
-    //       e.unshift(t);
-    //     }
-    //     e = e.map((t) => t.map(T));
-    //     const l = e.reduce((t, i) => {
-    //       const r = i.map((s) => (s + "").length);
-    //       return t.length ? t.map((s, u) => (s < r[u] ? r[u] : s)) : r;
-    //     }, []);
-    //     return e.reduce((t, i, r) => {
-    //       const s = i.map((u, a) => m(u, l[a]));
-    //       return (
-    //         t.length &&
-    //           (t += `
-    // `),
-    //         r === 1 &&
-    //           (t += `|${s
-    //             .map((u) => u.replace(/\|/g, "-"))
-    //             .join("|")
-    //             .replace(/[^|]/g, "-")}|
-    // `
-    //             .replace(/\|-/g, "| ")
-    //             .replace(/-\|/g, " |")),
-    //         t + `|${s.join("|")}|`
-    //       );
-    //     }, "");
-    //   }
-  
     function isArrayOfObjects(e) {
       return Array.isArray(e) && e.every(O);
     }
@@ -175,14 +143,6 @@ var ConsolAS = (function (d) {
         get isPolyfilled() {
           return e.get(this);
         }
-        // table(r) {
-        //   const s = { isTwoDimAr: p, isObject: M },
-        //     u = Object.keys(s).reduce((y, g) => (!y && f[g](r) ? s[g] : y), null);
-        //   if (u === null) throw new Error("Cannot convert input to table");
-        //   const a = t(u(r), this);
-        //   return console.log(a), a;
-        // }
-  
         table(r) {
           // Check if the input is an array of objects and convert if necessary
           if (isArrayOfObjects(r)) {
