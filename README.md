@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to ConsolAS - the library with the missing `console` methods for Google Apps Script 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0.3-blue.svg?cacheSeconds=2592000" />
   <a href="#" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
@@ -10,7 +10,9 @@
 
 ## Getting Started
 
-### As a Google Apps Script Library
+`ConsolAS` can be used as a native Apps Script library, as an NPM module or simply copied and pasted into your code.
+
+### As a Native Google Apps Script Library
 
 Import the following script ID as a library into your Google Apps Script project:
 
@@ -21,7 +23,7 @@ Import the following script ID as a library into your Google Apps Script project
 Initiate `ConsoleAS`:
 
 ```js
-const cx  = ConsoleAS.init();
+const cx = ConsolAS.init();
 ```
 
 ### As an NPM module
@@ -105,9 +107,18 @@ Currently only the `table(TwoDimArray|Object)` method works. Other methods will 
 npm t
 ```
 
+## See Also
+
+- [CONTRIBUTING](CONTRIBUTING.md)
+- [CODE OF CONDUCT](CODE_OF_CONDUCT.md)
+
 ## Author
 
-👤 **Dmitry Kostyuk | [Wurkspaces.dev](https://wurkspaces.dev)**
+- 👤 **Dmitry Kostyuk**
+- [Wurkspaces.dev](https://wurkspaces.dev)
+- [LinkedIn](<[linkedin.com](https://www.linkedin.com/in/dmitrykostyuk/)>)
+- [Medium](https://blog.wurkspaces.dev)
+- [Stack Overflow](https://stackoverflow.com/users/13229211/dmitry-kostyuk)
 
 ## Show your support
 
