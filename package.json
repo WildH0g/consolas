@@ -4,7 +4,7 @@
   "author": "Dmitry Kostyuk | Wurkspaces.dev",
   "license": "MIT",
   "private": false,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "main": "./dist/node/consolas.umd.cjs",
   "module": "./dist/node/consolas.js",
@@ -48,7 +48,7 @@
     "tree": "tree -I 'node_modules' -I '.git' --dirsfirst -a"
   },
   "devDependencies": {
-    "@types/google-apps-script": "^1.0.60",
+    "@types/google-apps-script": "^1.0.83",
     "@types/jest": "^29.5.12",
     "eslint": "^8.4.0",
     "eslint-config-prettier": "^8.8.0",

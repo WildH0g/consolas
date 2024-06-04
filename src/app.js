@@ -6,8 +6,10 @@
 
 import twoDimArrToTable from './class-methods/table-2d-array.js';
 import objectToTable from './class-methods/table-object.js';
+import objectArrayToTable from './class-methods/table-object-array.js';
 import TypeCheck from './helpers/type-checkers.js';
 import polyfillRequire from './helpers/require-polyfill.js';
+
 polyfillRequire();
 // @ts-ignore
 // require('google-apps-script');
@@ -94,6 +96,7 @@ export const ConsolAS = (function () {
       const typeMap = {
         isTwoDimAr: twoDimArrToTable,
         isObject: objectToTable,
+        isObjectArray: objectArrayToTable,
       };
 
       const fn = Object.keys(typeMap).reduce((fn, type) => {

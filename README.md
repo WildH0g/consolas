@@ -97,9 +97,43 @@ This prints out:
 | city       | Anytown   |
 ```
 
+**Example 3:**
+
+```js
+cx.table([
+  {
+    name: 'Alice',
+    age: 30,
+  },
+  {
+    name: 'Bob',
+    age: 25,
+  },
+  {
+    name: 'Charlie',
+    age: 35,
+  },
+  {
+    name: 'Diana',
+    age: 28,
+  },
+]);
+```
+
+This prints out:
+
+```text
+| (index) | name    | age |
+| ------- | ------- | --- |
+| 0       | Alice   | 30  |
+| 1       | Bob     | 25  |
+| 2       | Charlie | 35  |
+| 3       | Diana   | 28  |
+```
+
 ## Supported Methods
 
-Currently only the `table(TwoDimArray|Object)` method works. Other methods will follow soon.
+Currently only the `table(TwoDimArray|Object)` method works. Other methods will follow soon. Check [CONTRIBUTING](CONTRIBUTING.md) if you are interest in implementing them.
 
 ## Run tests
 

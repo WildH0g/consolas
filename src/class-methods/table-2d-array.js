@@ -1,23 +1,39 @@
 import TypeCheck from '../helpers/type-checkers.js';
+/**
+ * @typedef {boolean|string} Indices
+ */
 
 /**
  * Converts a two-dimensional array to a markdown table
- * @param {TwoDimArray} twoDimAr - The array to log out
+ * @param {TwoDimArray | ObjectArray} twoDimAr - The array to log out
+ * @param {{ addIndices?: Indices }} options - The options object
  * @returns {string} - The markdown output
  */
-export default function twoDimArrToTable(twoDimAr, { addIndices = true } = {}) {
+export default function twoDimArrToTable(twoDimAr, options = {}) {
+  let { addIndices } = options;
+  if (undefined === addIndices) addIndices = true;
+
   const isTypeError = !TypeCheck.isTwoDimAr(twoDimAr);
   //@ts-expect-error
   if (isTypeError) twoDimAr = generateError_(twoDimAr, 'table(TwoDimArray)');
 
+  const header = [...twoDimAr[0]];
+
   if (!isTypeError && addIndices) {
+    if ('row-only' === addIndices) twoDimAr.shift();
     // Add a column to the beginning of the table
     twoDimAr.forEach((row, i) => row.unshift(i + ''));
 
     // Create and add a header row to the table
-    const headerRow = new Array(twoDimAr[0].length)
-      .fill()
-      .map((_, i) => (0 === i ? '(index)' : i - 1 + ''));
+    let headerRow;
+    if (true === addIndices) {
+      headerRow = new Array(twoDimAr[0].length)
+        .fill()
+        .map((_, i) => (0 === i ? '(index)' : i - 1 + ''));
+    }
+    if ('row-only' === addIndices) {
+      headerRow = ['(index)', ...header];
+    }
 
     twoDimAr.unshift(headerRow);
   }
@@ -36,18 +52,22 @@ export default function twoDimArrToTable(twoDimAr, { addIndices = true } = {}) {
   }, []);
 
   // Generate the MD table
-  const table = twoDimAr.reduce((tableStr, row, i) => {
-    const rowPadded = row.map((cell, i) => pad_(cell, colWidths[i]));
-    if (tableStr.length) tableStr += '\n';
-    if (1 === i)
-      tableStr += `|${rowPadded
-        .map((cell) => cell.replace(/\|/g, '-'))
-        .join('|')
-        .replace(/[^|]/g, '-')}|\n`
-        .replace(/\|-/g, '| ')
-        .replace(/-\|/g, ' |');
-    return tableStr + `|${rowPadded.join('|')}|`;
-  }, '');
+  // @ts-ignore
+  const table = twoDimAr.reduce(
+    (/** @type {string} */ tableStr, /** @type {any[]} */ row, i) => {
+      const rowPadded = row.map((cell, i) => pad_(cell, colWidths[i]));
+      if (tableStr.length) tableStr += '\n';
+      if (1 === i)
+        tableStr += `|${rowPadded
+          .map((cell) => cell.replace(/\|/g, '-'))
+          .join('|')
+          .replace(/[^|]/g, '-')}|\n`
+          .replace(/\|-/g, '| ')
+          .replace(/-\|/g, ' |');
+      return tableStr + `|${rowPadded.join('|')}|`;
+    },
+    ''
+  );
 
   return table;
 }
@@ -68,7 +88,6 @@ function pad_(str, cellLength) {
 /**
  * Trims an object to a certain length
  * @param {object} obj
- * @param {number} len
  * @returns {string}
  */
 function trimObject_(obj) {
