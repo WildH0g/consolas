@@ -17,7 +17,7 @@ export const injectedCode = (varName, exportsPath = 'dist/exports.js') =>
     '    for (const exp in ' + varName + ') {',
     "      'function' === typeof " + varName + "[exp] && !isClass(" + varName + "[exp]) ? exportFuncs.push(exp) : exportVars.push(exp);",
     '    }',
-    "let exportsFile = '';",
+    "let exportsFile = '/* eslint-disable no-undef */\\n';",
     'if (exportVars.length)',
     "  exportsFile += `const { ${exportVars.join(', ')} } = " + varName + ";`;",
     'if (exportFuncs.length)',
