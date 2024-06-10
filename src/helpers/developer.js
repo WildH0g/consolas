@@ -1,4 +1,4 @@
-export default (function() {
+export default (function () {
   const msg = `
 
 [36m [39m[36m█▀▄[39m[36m [39m[36m█▀▀[39m[36m [39m[36m█ █[39m[36m [39m[36m█▀▀[39m[36m [39m[36m█  [39m[36m [39m[36m█▀█[39m[36m [39m[36m█▀█[39m[36m [39m[36m█▀▀[39m[36m [39m[36m█▀▄[39m[36m [39m[36m [39m
@@ -15,5 +15,5 @@ export default (function() {
   
 https://wurkspaces.dev
   `;
-console.log(msg.trim());
-})()
+  console.log(msg.trim());
+})();
