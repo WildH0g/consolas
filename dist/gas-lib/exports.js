@@ -1,0 +1,1 @@
+function init(...args) { return lib_.init(...args); }

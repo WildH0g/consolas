@@ -1,15 +1,24 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { AppsScriptPlugin } from './vite-plugin/vite-plugin-appsscript.js';
+import { GoogleAppsScriptExportsPlugin } from './vite-plugin/vite-plugin-appsscript.js';
 
 export default defineConfig({
-  plugins: [AppsScriptPlugin('dist/copy-paste/consolas.iife.js', 'ConsolAS')],
+  plugins: [
+    GoogleAppsScriptExportsPlugin(
+      'dist/copy-paste/consolas.iife.js',
+      'dist/copy-paste/exports.js',
+      '__lib__',
+      {
+        exportsFile: false,
+      }
+    ),
+  ],
   build: {
     minify: true,
     outDir: resolve(process.cwd(), 'dist/copy-paste'),
     lib: {
       entry: resolve(process.cwd(), 'src/app.js'),
-      name: 'ConsolAS',
+      name: '__lib__',
       fileName: 'consolas',
       formats: ['iife'],
     },
