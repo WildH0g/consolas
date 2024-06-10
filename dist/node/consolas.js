@@ -1,106 +1,143 @@
-function g(e) {
+function b(e) {
   return Array.isArray(e) && Array.isArray(e == null ? void 0 : e[0]);
 }
-function b(e) {
+function y(e) {
   return typeof e == "object" && !Array.isArray(e);
 }
-const f = {
-  isTwoDimAr: g,
-  isObject: b
+function O(e) {
+  return Array.isArray(e) && e.every(y);
+}
+const d = {
+  isTwoDimAr: b,
+  isObject: y,
+  isObjectArray: O
 };
-function h(e, { addIndices: n = !0 } = {}) {
-  const c = !f.isTwoDimAr(e);
-  if (c && (e = T(e, "table(TwoDimArray)")), !c && n) {
-    e.forEach((i, r) => i.unshift(r + ""));
-    const t = new Array(e[0].length).fill().map((i, r) => r === 0 ? "(index)" : r - 1 + "");
-    e.unshift(t);
+function p(e, n = {}) {
+  let { addIndices: i } = n;
+  i === void 0 && (i = !0);
+  const l = !d.isTwoDimAr(e);
+  l && (e = m(e, "table(TwoDimArray)"));
+  const r = [...e[0]];
+  if (!l && i) {
+    i === "row-only" && e.shift(), e.forEach((s, u) => s.unshift(u + ""));
+    let t;
+    i === !0 && (t = new Array(e[0].length).fill().map((s, u) => u === 0 ? "(index)" : u - 1 + "")), i === "row-only" && (t = ["(index)", ...r]), e.unshift(t);
   }
-  e = e.map((t) => t.map(m));
-  const l = e.reduce((t, i) => {
-    const r = i.map((s) => (s + "").length);
-    return t.length ? t.map((s, u) => s < r[u] ? r[u] : s) : r;
+  e = e.map((t) => t.map(j));
+  const c = e.reduce((t, s) => {
+    const u = s.map((f) => (f + "").length);
+    return t.length ? t.map((f, a) => f < u[a] ? u[a] : f) : u;
   }, []);
-  return e.reduce((t, i, r) => {
-    const s = i.map((u, a) => O(u, l[a]));
-    return t.length && (t += `
-`), r === 1 && (t += `|${s.map((u) => u.replace(/\|/g, "-")).join("|").replace(/[^|]/g, "-")}|
-`.replace(/\|-/g, "| ").replace(/-\|/g, " |")), t + `|${s.join("|")}|`;
-  }, "");
+  return e.reduce(
+    (t, s, u) => {
+      const f = s.map((a, h) => T(a, c[h]));
+      return t.length && (t += `
+`), u === 1 && (t += `|${f.map((a) => a.replace(/\|/g, "-")).join("|").replace(/[^|]/g, "-")}|
+`.replace(/\|-/g, "| ").replace(/-\|/g, " |")), t + `|${f.join("|")}|`;
+    },
+    ""
+  );
 }
-function O(e, n) {
+function T(e, n) {
   e += "";
-  const c = 1, l = n - e.length - c + 2;
-  return `${" ".repeat(c)}${e}${" ".repeat(l)}`;
+  const i = 1, l = n - e.length - i + 2;
+  return `${" ".repeat(i)}${e}${" ".repeat(l)}`;
 }
-function m(e) {
+function j(e) {
   if (typeof e != "object")
     return e;
   let n = JSON.stringify(e);
   return n.length > 25 && (n = n.substring(0, 21) + "..."), n;
 }
-function T(e, n) {
+function m(e, n) {
   return e = e + "", e.length > 25 && (e = e.slice(0, 21) + "..."), [
     ["Error", "Source", "Input"],
     ["Invalid argument", n, e]
   ];
 }
-function j(e) {
-  if (!f.isObject(e))
+function E(e) {
+  if (!d.isObject(e))
     throw "This is not an object";
   const n = ["(index)", "Value"];
-  let c = M(e, n).map(
-    (o) => o.map((t) => t && t !== void 0 ? t : "")
-  ).map((o) => {
-    const t = n.length - o.length;
-    for (let i = 0; i < t; i++)
-      o.push("");
-    return o;
+  let i = M(e, n).map(
+    (r) => r.map((c) => c && c !== void 0 ? c : "")
+  ).map((r) => {
+    const c = n.length - r.length;
+    for (let o = 0; o < c; o++)
+      r.push("");
+    return r;
   });
-  const l = [n, ...c];
-  return h(l, { addIndices: !1 });
+  const l = [n, ...i];
+  return p(l, { addIndices: !1 });
 }
-function E(e) {
-  return Array.isArray ? e.reduce((n, c, l) => (n[l] = c, n), {}) : e;
+function I(e) {
+  return Array.isArray ? e.reduce((n, i, l) => (n[l] = i, n), {}) : e;
 }
-function y(e, n, c, l) {
-  return e.forEach((o) => {
-    n.indexOf(o[0]) === -1 && n.push(o[0]);
+function g(e, n, i, l) {
+  return e.forEach((r) => {
+    n.indexOf(r[0]) === -1 && n.push(r[0]);
   }), e.reduce(
-    (o, [t, i]) => {
-      if (f.isObject(i))
-        return y(Object.entries(i), n, c, !1);
-      const r = n.findIndex((s) => s === t);
-      return o[r] = i, [...o].map(
+    (r, [c, o]) => {
+      if (d.isObject(o))
+        return g(Object.entries(o), n, i, !1);
+      const t = n.findIndex((s) => s === c);
+      return r[t] = o, [...r].map(
         (s) => s !== void 0 ? s : l ? "" : "{...}"
       );
     },
-    [c, ""]
+    [i, ""]
   );
 }
 function M(e, n) {
-  return Object.entries(e).map(([o, t]) => {
-    let i = !1;
-    return Array.isArray(t) && (t = E(t), i = !0), f.isObject(t) ? y(Object.entries(t), n, o, i) : [o, t];
+  return Object.entries(e).map(([r, c]) => {
+    let o = !1;
+    return Array.isArray(c) && (c = I(c), o = !0), d.isObject(c) ? g(Object.entries(c), n, r, o) : [r, c];
   });
 }
+function A(e) {
+  if (!d.isObjectArray(e))
+    throw "This is not an object array";
+  const n = {};
+  let i = -1;
+  const l = [];
+  let r = [];
+  for (const o of e) {
+    const t = Object.entries(o), s = new Array(t.length).fill("");
+    t.forEach(([u, f]) => {
+      u in n || (n[u] = ++i, l.push(u)), s[n[u]] = f;
+    }), r.push(s);
+  }
+  r.forEach((o) => {
+    for (let t = 0; t < o.length; t++)
+      t in o || (o[t] = "");
+  }), r.forEach((o) => {
+    if (o.length === l.length)
+      return;
+    const t = l.length - o.length;
+    for (let s = 0; s < t; s++)
+      o.push("");
+  });
+  const c = [l, ...r];
+  return p(c, { addIndices: "row-only" });
+}
 const L = (e) => e;
-function I() {
+function x() {
   globalThis.require = globalThis.require || L;
 }
-I();
+x();
 const P = function() {
-  const e = /* @__PURE__ */ new WeakMap(), n = ["table"], c = ["log", "warn", "error"], l = /* @__PURE__ */ new WeakMap();
-  class o {
+  const e = /* @__PURE__ */ new WeakMap(), n = ["table"], i = ["log", "warn", "error"], l = /* @__PURE__ */ new WeakMap();
+  class r {
     constructor() {
-      return o.instance || (e.set(this, !1), l.set(this, []), c.forEach((r) => this[r] = console[r]), o.instance = this), o.instance;
+      return r.instance || (e.set(this, !1), l.set(this, []), i.forEach((t) => this[t] = console[t]), r.instance = this), r.instance;
     }
     /**
      * Polyfills the Console object.
      * @returns {ConsolAS}
      */
     polyfill() {
-      return this.isPolyfilled ? this : (n.forEach((r) => {
-        r in Object.getPrototypeOf(console) || (Object.getPrototypeOf(console)[r] = this[r].bind(this));
+      return this.isPolyfilled ? this : (n.forEach((t) => {
+        t in Object.getPrototypeOf(console) || (Object.getPrototypeOf(console)[t] = this[t].bind(this));
       }), e.set(this, !0), this);
     }
     /**
@@ -115,15 +152,16 @@ const P = function() {
      * @param {TwoDimArray | object} ar
      * @returns {string} - The
      */
-    table(r) {
+    table(t) {
       const s = {
-        isTwoDimAr: h,
-        isObject: j
-      }, u = Object.keys(s).reduce((d, p) => !d && f[p](r) ? s[p] : d, null);
+        isTwoDimAr: p,
+        isObject: E,
+        isObjectArray: A
+      }, u = Object.keys(s).reduce((a, h) => !a && d[h](t) ? s[h] : a, null);
       if (u === null)
         throw new Error("Cannot convert input to table");
-      const a = t(u(r), this);
-      return console.log(a), a;
+      const f = c(u(t), this);
+      return console.log(f), f;
     }
     // TODO: Implement the tree method
     /**
@@ -131,7 +169,7 @@ const P = function() {
      * @param {GoogleAppsScript.Drive.Folder} folder
      * @param {TreeOptions} options
      */
-    tree(r, s) {
+    tree(t, s) {
       console.log('⏳ Method "tree" not implemented yet');
     }
     // TODO: Implement the assert method
@@ -159,11 +197,11 @@ const P = function() {
       console.log('⏳ Method "help" not implemented yet');
     }
   }
-  o.instance = null;
-  function t(i, r) {
-    return l.get(r).push(i), i;
+  r.instance = null;
+  function c(o, t) {
+    return l.get(t).push(o), o;
   }
-  return o;
+  return r;
 }();
 export {
   P as ConsolAS
