@@ -17,7 +17,7 @@
   "homepage": "https://github.com/WildH0g/consolas",
   "repository": {
     "type": "git",
-    "url": "https://github.com/WildH0g/consolas"
+    "url": "git+https://github.com/WildH0g/consolas.git"
   },
   "keywords": [
     "consolas",
