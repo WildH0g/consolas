@@ -37,7 +37,7 @@ npm i @wildhog/consolas
 Import and initiate `ConsolAS`:
 
 ```js
-import { ConsolAS } from 'consolas';
+import { ConsolAS } from '@wildhog/consolas';
 const cx = new ConsolAS();
 ```
 
