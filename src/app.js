@@ -9,6 +9,7 @@ import objectToTable from './class-methods/table-object.js';
 import objectArrayToTable from './class-methods/table-object-array.js';
 import TypeCheck from './helpers/type-checkers.js';
 import polyfillRequire from './helpers/require-polyfill.js';
+import cloneDeep from 'lodash/cloneDeep';
 
 polyfillRequire();
 // @ts-ignore
@@ -89,25 +90,27 @@ export const ConsolAS = (function () {
 
     /**
      * Prints arrays and objects in markdown table format.
-     * @param {TwoDimArray | object} ar
+     * @param {TwoDimArray | object} obj
+     * @param {{returnOnly: boolean}} [options] The options object, if `returnOnly` is `true`, returns the MD table without logging it.
      * @returns {string} - The
      */
-    table(ar) {
+    table(origObj, options = { returnOnly: false }) {
       const typeMap = {
         isTwoDimAr: twoDimArrToTable,
         isObject: objectToTable,
         isObjectArray: objectArrayToTable,
       };
 
+      const obj = cloneDeep(origObj);
       const fn = Object.keys(typeMap).reduce((fn, type) => {
-        if (!fn && TypeCheck[type](ar)) return typeMap[type];
+        if (!fn && TypeCheck[type](obj)) return typeMap[type];
         return fn;
       }, null);
 
       if (null === fn) throw new Error('Cannot convert input to table');
 
-      const output = addToHistory_(fn(ar), this);
-      console.log(output);
+      const output = addToHistory_(fn(obj), this);
+      if (!options.returnOnly) console.log(output);
       return output;
     }
 
