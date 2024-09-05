@@ -1,4 +1,4 @@
-import objectToTable from '../src/class-methods/table-object';
+import objectToTable from '../src/server/class-methods/table-object';
 
 describe('Object to MD Table', () => {
   it('Simple object', () => {

@@ -1,9 +1,9 @@
-import { ConsolAS } from "./app.js";
+import { ConsolAS } from '../app.js';
 
 /**
- * 
- * @param {{polyfill: [Boolean]}} opts 
- * @returns 
+ *
+ * @param {{polyfill: [Boolean]}} opts
+ * @returns
  */
 export function init(opts) {
   const polyfill = opts?.polyfill || false;

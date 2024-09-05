@@ -10,7 +10,7 @@ export default defineConfig({
     lib: {
       entry: resolve(process.cwd(), 'src/app.js'),
       name: 'init',
-      fileName: 'consolas',
+      fileName: 'app',
     },
     rollupOptions: {
       output: {

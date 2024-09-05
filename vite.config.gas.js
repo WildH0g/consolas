@@ -3,34 +3,15 @@ import { resolve } from 'path';
 import { GoogleAppsScriptExportsPlugin } from './vite-plugin/vite-plugin-appsscript.js';
 
 export default defineConfig({
-  plugins: [
-    GoogleAppsScriptExportsPlugin(
-      'dist/gas-lib/consolas.iife.js',
-      'dist/gas-lib/exports.js',
-      'lib_',
-      {
-        copyFiles: [
-          {
-            from: 'appsscript.json',
-            to: 'dist/gas-lib/appsscript.json',
-          },
-        ],
-      }
-    ),
-  ],
+  plugins: [GoogleAppsScriptExportsPlugin()],
   build: {
-    minify: true,
-    outDir: resolve(process.cwd(), 'dist/gas-lib'),
+    minify: false,
+    outDir: resolve(process.cwd(), 'dist/gas/server'),
     lib: {
-      entry: resolve(process.cwd(), 'src/gas-app.js'),
+      entry: resolve(process.cwd(), 'src/server/server.js'),
       name: 'lib_',
-      fileName: 'consolas',
+      fileName: 'server',
       formats: ['iife'],
-    },
-    rollupOptions: {
-      output: {
-        extend: false,
-      },
     },
   },
 });

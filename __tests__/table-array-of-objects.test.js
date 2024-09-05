@@ -1,4 +1,4 @@
-import objectArrayToTable from '../src/class-methods/table-object-array.js';
+import objectArrayToTable from '../src/server/class-methods/table-object-array.js';
 
 describe('Array of objects', () => {
   it('Simple objects', () => {

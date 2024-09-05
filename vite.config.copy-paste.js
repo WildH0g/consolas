@@ -5,7 +5,7 @@ import { GoogleAppsScriptExportsPlugin } from './vite-plugin/vite-plugin-appsscr
 export default defineConfig({
   plugins: [
     GoogleAppsScriptExportsPlugin(
-      'dist/copy-paste/consolas.iife.js',
+      'dist/copy-paste/app.iife.js',
       'dist/copy-paste/exports.js',
       '__lib__',
       {
@@ -19,7 +19,7 @@ export default defineConfig({
     lib: {
       entry: resolve(process.cwd(), 'src/app.js'),
       name: '__lib__',
-      fileName: 'consolas',
+      fileName: 'app',
       formats: ['iife'],
     },
     rollupOptions: {

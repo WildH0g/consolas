@@ -2,13 +2,11 @@
 
 import fs from 'fs';
 import { resolve } from 'path';
-import { injectedCode } from './injectedCode.js';
+import { parse } from '@babel/parser';
+import t from '@babel/traverse';
+import extractExports from './traverse/extract-exports.js';
 
-/**
- * @typedef {Object} GasExportOptions
- * @prop {boolean} [exportsFile] Whether to create a separate exports file
- * @prop {{from: string, to: string}[]} [copyFiles] The files to copy
- */
+const traverse = t.default;
 
 /**
  * Extracts the exports as stand-alone functions
@@ -18,24 +16,55 @@ import { injectedCode } from './injectedCode.js';
  * @param {GasExportOptions} [options] The options for the plugin
  */
 export async function GoogleAppsScriptExportsPlugin(
-  origPath = 'dist/server/server.iife.js',
-  exportsPath = 'dist/exports.js',
+  origPath = 'dist/gas/server/server.iife.js',
+  exportsPath = 'dist/gas/exports.js',
   varName = 'lib_',
-  options = { exportsFile: true, copyFiles: [] }
+  options = {
+    exportsFile: true,
+    copyFiles: [{ from: './appsscript.json', to: 'dist/gas/appsscript.json' }],
+  }
 ) {
   return {
-    name: 'vite-plugin-appscript',
+    name: 'vite-plugin-appscript-exports',
     async closeBundle() {
-      const tempPath = resolve(
-        process.cwd(),
-        origPath.replace(/\.js$/, '.temp.js')
-      );
       try {
-        fs.copyFileSync(resolve(process.cwd(), origPath), tempPath);
-        fs.appendFileSync(tempPath, injectedCode(varName, exportsPath), 'utf8');
-        const { execSync } = await import('child_process');
-        execSync(`node ${tempPath}`);
-        fs.unlinkSync(tempPath);
+        console.log('closeBundle');
+        const code = fs.readFileSync(origPath, 'utf-8');
+        const ast = parse(code);
+        const exportDetails = extractExports(ast);
+        // fs.writeFileSync(
+        //   'exportDetails.json',
+        //   JSON.stringify(exportDetails, null, 2)
+        // );
+
+        const getParam = paramObj => {
+          if (!paramObj.defaultValue) return paramObj.name;
+          if ('string' === typeof paramObj.defaultValue)
+            return `${paramObj.name} = '${paramObj.defaultValue.replace(
+              /'/g,
+              "\\'"
+            )}'`;
+          return `${paramObj.name} = ${paramObj.defaultValue}`;
+        };
+        const exportsText =
+          '/* eslint-disable no-undef */\n' +
+          exportDetails
+            .map(fn => {
+              return null === fn.parameters
+                ? `const ${fn.name} = ${varName}.${fn.name};`
+                : [
+                    `function ${fn.name}(${fn.parameters
+                      .map(getParam)
+                      .join(', ')}) {`,
+                    `  return ${varName}.${fn.name}(${fn.parameters
+                      .map(p => p.name)
+                      .join(', ')});`,
+                    '}',
+                  ].join('\n');
+            })
+            .join('\n');
+
+        fs.writeFileSync(exportsPath, exportsText, 'utf8');
 
         if (false === options.exportsFile) {
           const exp = fs.readFileSync(
@@ -54,7 +83,7 @@ export async function GoogleAppsScriptExportsPlugin(
       }
 
       if (!options.copyFiles || !options.copyFiles.length) return;
-      options.copyFiles.forEach((file) => {
+      options.copyFiles.forEach(file => {
         fs.copyFileSync(
           resolve(process.cwd(), file.from),
           resolve(process.cwd(), file.to)

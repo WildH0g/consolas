@@ -8,12 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist/ui
 dist-ssr
 *.local
 .husky
-src/assets/output.css
-sandbox
 
 # Editor directories and files
 .vscode/*

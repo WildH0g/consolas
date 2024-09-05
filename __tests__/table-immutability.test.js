@@ -1,4 +1,4 @@
-import { ConsolAS } from '../src/app.js';
+import { ConsolAS } from '../src/server/server.js';
 const cx = new ConsolAS();
 
 describe('Consoled object must not mutate', () => {
