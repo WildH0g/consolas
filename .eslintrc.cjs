@@ -5,6 +5,7 @@ module.exports = {
     es2021: true,
     node: true,
     'googleappsscript/googleappsscript': true,
+    jest: true,
   },
   extends: [
     'eslint:recommended',

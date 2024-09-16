@@ -1258,7 +1258,13 @@ var lib_ = function(exports) {
     }
     return ConsolAS2;
   }();
-  exports.ConsolAS = ConsolAS;
+  function init(opts) {
+    const polyfill = (opts == null ? void 0 : opts.polyfill) || false;
+    if (polyfill)
+      return new ConsolAS().polyfill();
+    return new ConsolAS();
+  }
+  exports.init = init;
   Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
   return exports;
 }({});

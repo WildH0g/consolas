@@ -1,4 +1,4 @@
 /* eslint-disable no-undef */
-function ConsolAS() {
-  return lib_.ConsolAS();
+function init(opts) {
+  return lib_.init(opts);
 }

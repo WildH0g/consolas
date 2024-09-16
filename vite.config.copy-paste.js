@@ -17,7 +17,7 @@ export default defineConfig({
     minify: true,
     outDir: resolve(process.cwd(), 'dist/copy-paste'),
     lib: {
-      entry: resolve(process.cwd(), 'src/app.js'),
+      entry: resolve(process.cwd(), 'src/server/gas-app.js'),
       name: '__lib__',
       fileName: 'app',
       formats: ['iife'],
