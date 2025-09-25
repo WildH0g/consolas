@@ -1,4 +1,4 @@
-import twoDimArrToTable from '../src/server/class-methods/table-2d-array.js';
+import twoDimArrToTable from '../src/server/class-methods/table/table-2d-array.js';
 
 // [ ] Add test: with an object
 // [ ] Add test: with object containinig objects

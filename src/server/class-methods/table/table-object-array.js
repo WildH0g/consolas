@@ -1,4 +1,4 @@
-import TypeCheck from '../helpers/type-checkers.js';
+import TypeCheck from '../../helpers/type-checkers.js';
 import twoDimArrToTable from './table-2d-array.js';
 
 /**

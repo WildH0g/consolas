@@ -1,4 +1,4 @@
-import TypeCheck from '../helpers/type-checkers.js';
+import TypeCheck from '../../helpers/type-checkers.js';
 /**
  * @typedef {boolean|string} Indices
  */
