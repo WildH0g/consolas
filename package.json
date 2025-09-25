@@ -60,5 +60,6 @@
     "vite-plugin-singlefile": "^0.13.5"
   },
   "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
