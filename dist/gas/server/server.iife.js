@@ -176,6 +176,38 @@ var lib_ = function(exports) {
     const twoDimArray = [headers, ...body];
     return twoDimArrToTable(twoDimArray, { addIndices: "row-only" });
   }
+  function assertMessage(expression, message, ...args) {
+    if (!!expression)
+      return null;
+    const err = `Assertion failed: ${parseMessage(message, ...args)}`;
+    return err;
+  }
+  function parseMessage(message, ...args) {
+    if (!args.length)
+      return message;
+    const re = /%[a-zA-Z]/g;
+    const matches = [...message.matchAll(re)];
+    if (matches.length > args.length)
+      matches.length = args.length;
+    if (args.length > matches.length)
+      args.length = matches.length;
+    for (let i = args.length - 1; i >= 0; i--) {
+      let arg = args[i];
+      const match = matches[i];
+      const matchType = match[0];
+      const { index } = match;
+      const argParseMap = {
+        "%s": String,
+        "%i": parseInt,
+        "%O": (i2) => JSON.stringify(i2),
+        "%o": (i2) => JSON.stringify(i2, null, 2)
+      };
+      if (argParseMap[matchType])
+        arg = argParseMap[matchType](arg);
+      message = message.substring(0, index) + arg + message.substring(index + 2);
+    }
+    return message;
+  }
   var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
   function getDefaultExportFromCjs(x) {
     return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
@@ -1226,9 +1258,19 @@ var lib_ = function(exports) {
       tree(folder, options) {
         console.log('⏳ Method "tree" not implemented yet');
       }
-      // TODO: Implement the assert method
-      assert() {
-        console.log('⏳ Method "assert" not implemented yet');
+      /**
+       * Asserts that an expression is truthy. If the expression is falsy, an error message is logged to the console.
+       * The error message can be formatted using printf-like placeholders.
+       *
+       * @param {any} expression - The expression to assert.
+       * @param {string} message - The base error message. Can contain placeholders like %s, %i, %O, %o.
+       * @param {...any} args - Arguments to substitute into the message placeholders.
+       */
+      assert(expression, message, ...args) {
+        const msg = assertMessage(expression, message);
+        if (null === msg)
+          return;
+        console.error(message);
       }
       // TODO: Implement the group methods
       group() {
