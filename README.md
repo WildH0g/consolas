@@ -97,22 +97,8 @@ This prints out:
 | city       | Anytown   |
 ```
 
-**Example 3:**
-
 ```js
 cx.table([
-  {
-    name: 'Alice',
-    age: 30,
-  },
-  {
-    name: 'Bob',
-    age: 25,
-  },
-  {
-    name: 'Charlie',
-    age: 35,
-  },
   {
     name: 'Diana',
     age: 28,
@@ -125,15 +111,30 @@ This prints out:
 ```text
 | (index) | name    | age |
 | ------- | ------- | --- |
-| 0       | Alice   | 30  |
-| 1       | Bob     | 25  |
-| 2       | Charlie | 35  |
-| 3       | Diana   | 28  |
+| 0       | Diana   | 28  |
+```
+
+**Example 4:**
+
+```js
+cx.assert(1 === 1, '1 is not equal to 1');
+```
+
+This prints out nothing if the assertion passes.
+
+```js
+cx.assert(1 === 2, '1 is not equal to %i', 2);
+```
+
+This prints out:
+
+```text
+Assertion failed: 1 is not equal to 2
 ```
 
 ## Supported Methods
 
-Currently only the `table(TwoDimArray|Object)` method works. Other methods will follow soon. Check [CONTRIBUTING](CONTRIBUTING.md) if you are interest in implementing them.
+Currently, the `table(TwoDimArray|Object)` and `assert(condition, message, ...args)` methods are supported. Other methods will follow soon. Check [CONTRIBUTING](CONTRIBUTING.md) if you are interested in implementing them.
 
 ## Run tests
 
