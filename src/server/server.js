@@ -1,6 +1,7 @@
-import twoDimArrToTable from './class-methods/table-2d-array.js';
-import objectToTable from './class-methods/table-object.js';
-import objectArrayToTable from './class-methods/table-object-array.js';
+import twoDimArrToTable from './class-methods/table/table-2d-array.js';
+import objectToTable from './class-methods/table/table-object.js';
+import objectArrayToTable from './class-methods/table/table-object-array.js';
+import assertMessage from './class-methods/assert/assert-msg.js';
 import TypeCheck from './helpers/type-checkers.js';
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -113,9 +114,18 @@ export const ConsolAS = (function () {
       console.log('⏳ Method "tree" not implemented yet');
     }
 
-    // TODO: Implement the assert method
-    assert() {
-      console.log('⏳ Method "assert" not implemented yet');
+    /**
+     * Asserts that an expression is truthy. If the expression is falsy, an error message is logged to the console.
+     * The error message can be formatted using printf-like placeholders.
+     *
+     * @param {any} expression - The expression to assert.
+     * @param {string} message - The base error message. Can contain placeholders like %s, %i, %O, %o.
+     * @param {...any} args - Arguments to substitute into the message placeholders.
+     */
+    assert(expression, message, ...args) {
+      const msg = assertMessage(expression, message);
+      if (null === msg) return;
+      console.error(message);
     }
 
     // TODO: Implement the group methods
