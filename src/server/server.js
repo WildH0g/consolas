@@ -125,6 +125,7 @@ export const ConsolAS = (function () {
     assert(expression, message, ...args) {
       const msg = assertMessage(expression, message);
       if (null === msg) return;
+      addToHistory_(message, this);
       console.error(message);
     }
 
