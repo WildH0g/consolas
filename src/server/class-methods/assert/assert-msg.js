@@ -37,6 +37,7 @@ function parseMessage(message, ...args) {
     const argParseMap = {
       '%s': String,
       '%i': parseInt,
+      '%f': parseFloat,
       '%O': i => JSON.stringify(i),
       '%o': i => JSON.stringify(i, null, 2),
     };
